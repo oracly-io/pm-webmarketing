@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "commonjs",
+    "paths": {
+      "@/*": ["src/*"],
+      "@boot/*": ["src/boot/*"],
+      "@config/*": ["src/config/*"],
+      "@constants": ["src/constants/*"],
+      "@lib/*": ["src/lib/*"],
+      "@static/*": ["static/*"],
+      "@styles/*": ["src/styles/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

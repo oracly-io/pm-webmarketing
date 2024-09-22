@@ -1,0 +1,62 @@
+---
+version: "3.0"
+services:
+  parimarket:
+    image: node:18.12.0
+    user: "${UID:-node}:${GID:-node}"
+    tty: "${TTY:-true}"
+    working_dir: /build
+    volumes:
+      - ./:/build
+    command: sh -c "
+      npm install -d &&
+      npm audit fix || true &&
+      echo -c '/pm-libs/bin/link' &&
+      echo -c '/pm-stickchart/bin/link' &&
+      npm run build:lde"
+    environment:
+      NPM_CONFIG_PREFIX: "~/.npm-inner"
+
+      CONTENT_PUBLIC_PATH: "/"
+      LOCIZE_PROJECT_ID: "${LOCIZE_PROJECT_ID}"
+      LOCIZE_API_KEY: "${LOCIZE_API_KEY}"
+      BUILD_BUNDLE_REPORT: "true"
+      BUILD_BUNDLE_REPORT_DEBUG: "false"
+      ANALYTICS_ENABLED: "false"
+      NODE_ENV: "development"
+      PORT: "8888"
+      LOCALE: "en"
+      LOCALES: "en,ua"
+
+      WHITE_PAPER_MARKDOWN_URL: "https://hackmd.io/@icimMsHLRAGak1gdPDhrhw/SkEP3VnWC/download"
+
+      # LOCAL CLUSTER
+      # WEBAPI_URL: "http://localhost:8802/v1/"
+      CONTRACTS_DOCUMENTATION_URL: "https://staging.oracly.io/docs"
+      #
+      # PRODUCTION CLUSTER
+      # WEBAPI_URL: "https://webapi.oracly.io/v1/"
+      # CONTRACTS_DOCUMENTATION_URL: "https://oracly.io/docs"
+      #
+      # STAGING CLUSTER
+      WEBAPI_URL: "https://app.staging.oracly.io/v1/"
+
+      DEBUG_COLORS: "true"
+      DEBUG: "pm:*"
+    ports:
+      - '8888:${PORT:-8888}'
+
+  # translation-scanner:
+  #   image: git.parimarket.com:5001/parimarket/translation-scanner:${IMAGE_TAG:-master}
+  #   volumes:
+  #     - .:/parimarket
+  #   command: sh -c "
+  #     npm install --silent &&
+  #     npm run compare"
+  #   environment:
+  #     LOCIZE_PROJECT_ID: ""
+  #     LOCIZE_API_KEY: ""
+  #     LANGUAGES: "es,en"
+  #     PROJECT_SRC: "/parimarket/src"
+  #     PUBLISH_MISSED_KEYS: "true"
+  #     SAVE_KEYS_LOCALLY: "true"

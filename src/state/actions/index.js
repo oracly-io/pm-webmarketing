@@ -1,0 +1,1 @@
+export const GET_PRICE_FEED = 'GET_PRICE_FEED'

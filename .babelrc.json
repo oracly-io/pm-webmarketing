@@ -1,0 +1,10 @@
+{
+  "presets": ["@babel/env"],
+  "plugins": [
+    "@babel/transform-runtime",
+    "transform-export-extensions",
+    "add-module-exports",
+    "lodash"
+  ],
+  "comments": false
+}

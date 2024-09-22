@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false,
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "globals": {
+    "AppBoot": true,
+    "process": false,
+    "require": false,
+    "Promise": false
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "camelcase": 0,
+    "no-console": 1,
+    "no-debugger": 1,
+    "operator-linebreak": [2, "after", { "overrides": { "?": "before", ":": "before" } }],
+    "semi": [2, "never"],
+    "no-unused-vars": ["error", { "args": "none" }],
+    "no-trailing-spaces": 2,
+    "no-useless-escape": 0,
+    "no-empty-function": "warn",
+    "no-self-assign": 0
+  }
+}
